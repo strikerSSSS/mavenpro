@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('clone from github(GitHubBuild)') {
             steps {
-                git branch: 'master', url: 'https://github.com/adikesavanaidug2404/DeployProject.git'
+                git branch: 'master', url: 'https://github.com/strikerSSSS/mavenpro.git'
             }
         }
         stage('build war file(MavenBuild)') {
