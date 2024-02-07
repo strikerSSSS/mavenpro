@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        SONARQUBE_HOME = tool 'sonarpro'
+    }
+
 
     stages {
         stage('clone from github(GitHubBuild)') {
@@ -12,5 +16,15 @@ pipeline {
                 sh "mvn clean install package"
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('sonarcube') {
+                        sh "${SONARQUBE_HOME}/bin/sonar-scanner -Dsonar.projectKey=EKART -Dsonar.projectName=EKART -Dsonar.java.binaries=."
+                    }
+                }
+            }
+        }
     }
 }
+    
